@@ -1,0 +1,114 @@
+body {
+    background-color: #333;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    touch-action: none; /* Prevent browser zooming/scrolling */
+}
+
+h1 {
+    margin: 10px 0;
+    font-size: 24px;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+}
+
+canvas {
+    border: 4px solid white;
+    background-color: #5c94fc;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Touch Controls */
+#controls {
+    display: none; /* Hidden on desktop by default, shown via media query or JS if needed */
+    width: 100%;
+    max-width: 800px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    #controls {
+        display: flex;
+    }
+    h1 {
+        display: none; /* Hide title on mobile to save space */
+    }
+}
+
+button {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    border-radius: 50%;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 5px;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+button:active {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+#dpad {
+    display: flex;
+    align-items: center;
+}
+
+#actions {
+    display: flex;
+    align-items: center;
+}
+
+#btn-down {
+    margin-left: -65px; /* Hacky positioning for D-pad layout if needed, or just keep linear */
+    margin-top: 60px;
+}
+/* Simple linear layout for D-pad for now */
+#dpad {
+    display: grid;
+    grid-template-columns: 60px 60px 60px;
+    grid-template-rows: 60px 60px;
+    gap: 5px;
+}
+#btn-left { grid-column: 1; grid-row: 2; }
+#btn-right { grid-column: 3; grid-row: 2; }
+#btn-down { grid-column: 2; grid-row: 2; margin: 0; }
+/* Empty space for up/jump in dpad if we wanted, but jump is separate */
+
+#actions {
+    display: flex;
+    gap: 10px;
+}
+
+#btn-attack {
+    background: rgba(255, 0, 0, 0.3);
+    border-color: #ff5555;
+}
+
+#btn-jump {
+    background: rgba(0, 255, 0, 0.3);
+    border-color: #55ff55;
+}

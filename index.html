@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chanchilandia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <h1>Chanchilandia</h1>
+    <div id="game-container">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </div>
+
+    <div id="controls">
+        <div id="dpad">
+            <button id="btn-left">←</button>
+            <button id="btn-right">→</button>
+            <button id="btn-down">↓</button>
+        </div>
+        <div id="actions">
+            <button id="btn-jump">↑</button>
+            <button id="btn-attack">X</button>
+        </div>
+    </div>
+
+    <div style="margin-top: 10px; text-align: center;">
+        <label for="volumeSlider" style="color: white; font-family: 'Courier New', Courier, monospace;">Volume:</label>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.05">
+    </div>
+    <script src="levels.js"></script>
+    <script src="game.js"></script>
+    <audio id="background-music" src="music/8-bit.wav" loop></audio>
+</body>
+
+</html>
