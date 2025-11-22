@@ -91,7 +91,7 @@ button:active {
     transform: scale(0.95);
 }
 
-/* D-Pad Layout (Bottom Left) */
+/* D-Pad Layout (Bottom Right) - Now includes Jump */
 #dpad {
     display: grid;
     grid-template-columns: 70px 70px 70px;
@@ -101,13 +101,15 @@ button:active {
     margin-bottom: 20px;
 }
 
-#btn-left {
-    grid-column: 1;
-    grid-row: 2;
+#btn-jump {
+    grid-column: 2;
+    grid-row: 1;
+    background: rgba(50, 255, 50, 0.3);
+    border-color: #55ff55;
 }
 
-#btn-right {
-    grid-column: 3;
+#btn-left {
+    grid-column: 1;
     grid-row: 2;
 }
 
@@ -116,31 +118,25 @@ button:active {
     grid-row: 2;
 }
 
-/* Empty space for visual balance */
+#btn-right {
+    grid-column: 3;
+    grid-row: 2;
+}
 
-/* Action Buttons Layout (Bottom Right) */
+/* Action Buttons Layout (Bottom Left) - Only Attack */
 #actions {
     display: flex;
-    gap: 15px;
     align-self: flex-end;
-    margin-bottom: 40px;
-    /* Lift slightly higher */
+    margin-bottom: 20px;
 }
 
 #btn-attack {
     background: rgba(255, 50, 50, 0.3);
     border-color: #ff5555;
-    width: 80px;
-    height: 80px;
-}
-
-#btn-jump {
-    background: rgba(50, 255, 50, 0.3);
-    border-color: #55ff55;
-    width: 80px;
-    height: 80px;
-    margin-bottom: 40px;
-    /* Offset jump button higher like a gamepad */
+    width: 90px;
+    height: 90px;
+    /* Make attack button larger */
+    font-size: 32px;
 }
 
 /* Volume Slider - Hide on mobile or position top right */
