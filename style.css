@@ -1,114 +1,155 @@
 body {
-    background-color: #333;
+    background-color: #000;
     color: white;
     font-family: 'Courier New', Courier, monospace;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    touch-action: none; /* Prevent browser zooming/scrolling */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    /* Prevent scrolling */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    touch-action: none;
 }
 
 h1 {
-    margin: 10px 0;
-    font-size: 24px;
+    display: none;
+    /* Hide title to save space */
 }
 
 #game-container {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 800px;
+    height: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    z-index: 1;
 }
 
 canvas {
-    border: 4px solid white;
     background-color: #5c94fc;
     max-width: 100%;
-    height: auto;
-    display: block;
+    max-height: 100%;
+    object-fit: contain;
+    /* Maintain aspect ratio */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Touch Controls */
+/* Touch Controls Overlay */
 #controls {
-    display: none; /* Hidden on desktop by default, shown via media query or JS if needed */
+    position: absolute;
+    bottom: 20px;
+    left: 0;
     width: 100%;
-    max-width: 800px;
+    height: 0;
+    /* Don't block clicks in the middle */
+    z-index: 10;
+    display: flex;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 0 20px;
     box-sizing: border-box;
-    margin-top: 10px;
+    pointer-events: none;
+    /* Let clicks pass through empty space */
 }
 
+/* Only show controls on touch devices */
 @media (hover: none) and (pointer: coarse) {
     #controls {
         display: flex;
     }
-    h1 {
-        display: none; /* Hide title on mobile to save space */
-    }
+}
+
+#dpad,
+#actions {
+    pointer-events: auto;
+    /* Re-enable clicks on buttons */
 }
 
 button {
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid white;
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     color: white;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
     margin: 5px;
     touch-action: manipulation;
     user-select: none;
     -webkit-user-select: none;
+    backdrop-filter: blur(2px);
 }
 
 button:active {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0.95);
 }
 
+/* D-Pad Layout (Bottom Left) */
 #dpad {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 70px 70px 70px;
+    grid-template-rows: 70px 70px;
+    gap: 5px;
+    align-self: flex-end;
+    margin-bottom: 20px;
 }
 
-#actions {
-    display: flex;
-    align-items: center;
+#btn-left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#btn-right {
+    grid-column: 3;
+    grid-row: 2;
 }
 
 #btn-down {
-    margin-left: -65px; /* Hacky positioning for D-pad layout if needed, or just keep linear */
-    margin-top: 60px;
+    grid-column: 2;
+    grid-row: 2;
 }
-/* Simple linear layout for D-pad for now */
-#dpad {
-    display: grid;
-    grid-template-columns: 60px 60px 60px;
-    grid-template-rows: 60px 60px;
-    gap: 5px;
-}
-#btn-left { grid-column: 1; grid-row: 2; }
-#btn-right { grid-column: 3; grid-row: 2; }
-#btn-down { grid-column: 2; grid-row: 2; margin: 0; }
-/* Empty space for up/jump in dpad if we wanted, but jump is separate */
 
+/* Empty space for visual balance */
+
+/* Action Buttons Layout (Bottom Right) */
 #actions {
     display: flex;
-    gap: 10px;
+    gap: 15px;
+    align-self: flex-end;
+    margin-bottom: 40px;
+    /* Lift slightly higher */
 }
 
 #btn-attack {
-    background: rgba(255, 0, 0, 0.3);
+    background: rgba(255, 50, 50, 0.3);
     border-color: #ff5555;
+    width: 80px;
+    height: 80px;
 }
 
 #btn-jump {
-    background: rgba(0, 255, 0, 0.3);
+    background: rgba(50, 255, 50, 0.3);
     border-color: #55ff55;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 40px;
+    /* Offset jump button higher like a gamepad */
+}
+
+/* Volume Slider - Hide on mobile or position top right */
+div[style*="text-align: center"] {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 15px;
 }
